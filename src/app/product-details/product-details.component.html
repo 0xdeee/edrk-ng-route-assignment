@@ -1,0 +1,17 @@
+<section class="container">
+  <section class="row">
+    <section class="col-6">
+      <p> Name: {{ product.name }}</p>
+      <p> Description: {{ product.description }}</p>
+      <p> Price: {{ product.price }}</p>
+    </section>
+    <section class="col-6">
+      <img class="img-thumbnail productImage" [src]="product.productImg" alt="product image here">
+    </section>
+  </section>
+  <section class="row">
+    <div class="col-2">
+      <button class="btn btn-info btn-md" (click)="goBack()">Go Back</button>
+    </div>
+  </section>
+</section>

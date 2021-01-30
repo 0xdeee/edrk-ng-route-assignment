@@ -1,1 +1,27 @@
-<p>product works!</p>
+<section class="container-flex">
+  <!-- <div class="alert alert-danger" *ngIf="isError">
+      <pre>
+        Unable to fetch data from endpoint
+        Reason: {{ errorResponse }}
+        details: {{ errorExplanation }}
+      </pre>
+    </div> -->
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr appColors *ngFor="let product of productList">
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+        <td>
+          <button class="btn btn-primary btm-sm" (click)="navToProductDetails(product)">View</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
