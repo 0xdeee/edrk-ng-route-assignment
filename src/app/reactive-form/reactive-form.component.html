@@ -1,5 +1,5 @@
 <!-- main app container -->
-<div class="d-flex justify-content-center" *ngIf="!isSubmitted">
+<div class="d-flex justify-content-center" *ngIf="!isFormValid">
   <div class="card m-3">
     <h5 class="card-header">Angular Reactive Form </h5>
     <div class="card-body">
@@ -7,37 +7,69 @@
         <div class="row">
           <div class="form-group col">
             <label>Full Name</label>
-            <input type="text" name="firstName" class="form-control" formControlName="fullName">
+            <input type="text" name="fullName" class="form-control" formControlName="fullName"
+              [ngClass]="{ 'is-invalid': isSubmitted && f.fullName.errors}">
+            <div *ngIf="isSubmitted && f.fullName.errors" class="invalid-feedback">
+              <div *ngIf="f.fullName.errors.required">Full Name is required</div>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col-6">
             <label>Email</label>
-            <input type="text" name="email" class="form-control" formControlName="email">
+            <input type="text" name="email" class="form-control" formControlName="email"
+              [ngClass]="{ 'is-invalid': isSubmitted && f.email.errors}">
+            <div *ngIf="isSubmitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Email is required</div>
+              <div *ngIf="f.email.errors.email">Email is not valid</div>
+            </div>
           </div>
           <div class="col-6">
             <label>Phone No</label>
-            <input type="number" name="phoneNo" class="form-control" formControlName="phoneNo">
+            <input type="text" name="phoneNo" class="form-control" formControlName="phoneNo"
+              [ngClass]="{ 'is-invalid': isSubmitted && f.phoneNo.errors}">
+            <div *ngIf="isSubmitted && f.phoneNo.errors" class="invalid-feedback">
+              <div *ngIf="f.phoneNo.errors.required">Phone No. is required</div>
+              <div *ngIf="f.phoneNo.errors.minlength">min 10 digits is required</div>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col-6">
             <label>Address</label>
-            <input type="text" name="address" class="form-control" formControlName="address">
+            <input type="text" name="address" class="form-control" formControlName="address"
+              [ngClass]="{ 'is-invalid': isSubmitted && f.address.errors}">
+            <div *ngIf="isSubmitted && f.address.errors" class="invalid-feedback">
+              <div *ngIf="f.address.errors.required">Address is required</div>
+            </div>
           </div>
           <div class="col-6">
             <label>City</label>
-            <input type="text" name="city" class="form-control" formControlName="city">
+            <input type="text" name="city" class="form-control" formControlName="city"
+              [ngClass]="{ 'is-invalid': isSubmitted && f.city.errors}">
+            <div *ngIf="isSubmitted && f.city.errors" class="invalid-feedback">
+              <div *ngIf="f.city.errors.required">City is required</div>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="form-group col">
             <label>Password</label>
-            <input type="password" name="password" class="form-control" formControlName="password">
+            <input type="password" name="password" class="form-control" formControlName="password"
+              [ngClass]="{ 'is-invalid': isSubmitted && f.password.errors}">
+            <div *ngIf="isSubmitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+              <div *ngIf="f.password.errors.minlength">min 5 chars is required</div>
+            </div>
           </div>
           <div class="form-group col">
             <label>Confirm Password</label>
-            <input type="password" name="confirmPassword" class="form-control" formControlName="passwordConfirm">
+            <input type="password" name="confirmPassword" class="form-control" formControlName="passwordConfirm"
+              [ngClass]="{ 'is-invalid': isSubmitted && f.passwordConfirm.errors}">
+            <div *ngIf="isSubmitted && f.passwordConfirm.errors" class="invalid-feedback">
+              <div *ngIf="f.passwordConfirm.errors.required">Re-enter Password</div>
+              <div *ngIf="f.passwordConfirm.errors.ConfirmPassword">Passwords do not match</div>
+            </div>
           </div>
         </div>
         <div class="row mt-3">
@@ -45,7 +77,7 @@
             <button class="btn btn-primary">Register</button>
           </div>
           <div class="col-3">
-            <button class="btn btn-secondary" type="reset">Clear</button>
+            <button class="btn btn-secondary" type="reset" (click)="onClear()">Clear</button>
           </div>
         </div>
       </form>
@@ -53,7 +85,7 @@
   </div>
 </div>
 
-<section class="container" *ngIf="isSubmitted">
+<section class="container" *ngIf="isFormValid">
   <section class="card">
     <section class="card-header">Please Review yout details</section>
     <section class="card-body">
