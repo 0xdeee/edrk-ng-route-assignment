@@ -8,6 +8,9 @@ import { ProductComponent } from './product/product.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { TemplateDrivenFormComponent } from './template-driven-form/template-driven-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +19,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ProductComponent,
     ContactComponent,
     ProductDetailsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    TemplateDrivenFormComponent,
+    ReactiveFormComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,0 +1,64 @@
+<!-- main app container -->
+<div class="d-flex justify-content-center" *ngIf="!isSubmitted">
+  <div class="card m-3">
+    <h5 class="card-header">Angular Template-Driven Form </h5>
+    <div class="card-body">
+      <form name="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+        <div class="row">
+          <div class="form-group col">
+            <label>Full Name</label>
+            <input type="text" name="firstName" class="form-control" [(ngModel)]="model.fullName" #fullName="ngModel">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label>Email</label>
+            <input type="text" name="email" class="form-control" [(ngModel)]="model.email" #email="ngModel">
+          </div>
+          <div class="col-6">
+            <label>Phone No</label>
+            <input type="number" name="phoneNo" class="form-control" [(ngModel)]="model.phoneNo" #phoneNo="ngModel">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" [(ngModel)]="model.password"
+              #password="ngModel">
+          </div>
+          <div class="form-group col">
+            <label>Confirm Password</label>
+            <input type="password" name="confirmPassword" class="form-control" [(ngModel)]="model.confirmPassword"
+              #confirmPassword="ngModel">
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-3">
+            <button class="btn btn-primary">Register</button>
+          </div>
+          <div class="col-3">
+            <button class="btn btn-secondary" type="reset">Clear</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<section class="container" *ngIf="isSubmitted">
+  <section class="card">
+    <section class="card-header">Please Review yout details</section>
+    <section class="card-body">
+      <p>Full Name: {{ model.fullName }}</p>
+      <p>Email: {{ model.email }}</p>
+      <p>Phone: {{ model.phoneNo }}</p>
+      <p>Password: {{ model.password }}</p>
+      <p>Comfirm Password: {{ model.confirmPassword }}</p>
+      <div class="row mt-3">
+        <div class="col-3">
+          <button class="btn btn-primary" (click)="goBack()">Go Back</button>
+        </div>
+      </div>
+    </section>
+  </section>
+</section>
