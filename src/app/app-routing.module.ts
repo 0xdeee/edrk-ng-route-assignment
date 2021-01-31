@@ -10,18 +10,18 @@ import { TemplateDrivenFormComponent } from './template-driven-form/template-dri
 
 const routes: Routes = [
   {
-    // for keeping template form as home
+    // for keeping reactive form as home
     path: '',
-    component: TemplateDrivenFormComponent,
+    component: ReactiveFormComponent,
   },
   {
     path: 'templateform',
     component: TemplateDrivenFormComponent,
   },
-  // {
-  //   path: 'reactiveform',
-  //   component: ReactiveFormComponent,
-  // },
+  {
+    path: 'reactiveform',
+    component: ReactiveFormComponent,
+  },
   {
     path: 'products/:name',
     component: ProductDetailsComponent,
