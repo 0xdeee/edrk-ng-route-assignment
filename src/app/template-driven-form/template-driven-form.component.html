@@ -3,33 +3,55 @@
   <div class="card m-3">
     <h5 class="card-header">Angular Template-Driven Form </h5>
     <div class="card-body">
-      <form name="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" [mustMatch]="['password', 'confirmPassword']"
+        #f="ngForm" novalidate>
         <div class="row">
           <div class="form-group col">
             <label>Full Name</label>
-            <input type="text" name="firstName" class="form-control" [(ngModel)]="model.fullName" #fullName="ngModel">
+            <input type="text" name="fullName" class="form-control" [(ngModel)]="model.fullName" #fullName="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && fullName.invalid }" required>
+            <div *ngIf="f.submitted && fullName.invalid" class="invalid-feedback">
+              <div *ngIf="fullName.errors.required">First Name is required</div>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col-6">
             <label>Email</label>
-            <input type="text" name="email" class="form-control" [(ngModel)]="model.email" #email="ngModel">
+            <input type="text" name="email" class="form-control" [(ngModel)]="model.email" #email="ngModel" required
+              [ngClass]="{ 'is-invalid': f.submitted && fullName.invalid }" email>
+            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+              <div *ngIf="email.errors.required">Email is required</div>
+              <div *ngIf="email.errors.email">Email is invalid</div>
+            </div>
           </div>
           <div class="col-6">
             <label>Phone No</label>
-            <input type="number" name="phoneNo" class="form-control" [(ngModel)]="model.phoneNo" #phoneNo="ngModel">
+            <input type="text" name="phoneNo" class="form-control" [(ngModel)]="model.phoneNo" #phoneNo="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && phoneNo.invalid }" required minlength="10">
+            <div *ngIf="f.submitted && phoneNo.invalid" class="invalid-feedback">
+              <div *ngIf="phoneNo.errors.required">Phone number is required</div>
+              <div *ngIf="phoneNo.errors.minlength">Phone number should be > 10 digits</div>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="form-group col">
             <label>Password</label>
-            <input type="password" name="password" class="form-control" [(ngModel)]="model.password"
-              #password="ngModel">
+            <input type="password" name="password" class="form-control" [(ngModel)]="model.password" #password="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required>
+            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+              <div *ngIf="password.errors.required">Password is required</div>
+            </div>
           </div>
           <div class="form-group col">
             <label>Confirm Password</label>
             <input type="password" name="confirmPassword" class="form-control" [(ngModel)]="model.confirmPassword"
-              #confirmPassword="ngModel">
+              #confirmPassword="ngModel" [ngClass]="{ 'is-invalid': f.submitted && confirmPassword.invalid }" required>
+            <div *ngIf="f.submitted && confirmPassword.invalid" class="invalid-feedback">
+              <div *ngIf="confirmPassword.errors.required">Re-enter your password</div>
+              <div *ngIf="confirmPassword.errors.mustMatch">Passwords must match</div>
+            </div>
           </div>
         </div>
         <div class="row mt-3">
